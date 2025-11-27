@@ -235,6 +235,8 @@ p {
 @media (min-width: 1200px) {
   .navmenu {
     padding: 0;
+    background-color: color-mix(in srgb, var(--background-color), var(--surface-color) 60%);
+    border-bottom: 1px solid color-mix(in srgb, var(--nav-color), transparent 70%);
   }
 
   .navmenu ul {
@@ -251,7 +253,7 @@ p {
 
   .navmenu>ul>li {
     white-space: nowrap;
-    padding: 15px 14px;
+    padding: 18px 18px; /* slightly more spacious */
   }
 
   .navmenu>ul>li:last-child {
@@ -261,15 +263,17 @@ p {
   .navmenu a,
   .navmenu a:focus {
     color: var(--nav-color);
-    font-size: 15px;
-    padding: 0 2px;
+    font-size: 0.9rem;
+    padding: 0;
     font-family: var(--nav-font);
-    font-weight: 400;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     display: flex;
     align-items: center;
     justify-content: space-between;
     white-space: nowrap;
-    transition: 0.3s;
+    transition: color 0.2s ease;
     position: relative;
   }
 
@@ -277,27 +281,27 @@ p {
   .navmenu a:focus i {
     font-size: 12px;
     line-height: 0;
-    margin-left: 5px;
-    transition: 0.3s;
+    margin-left: 6px;
+    transition: transform 0.2s ease;
   }
 
   .navmenu>ul>li>a:before {
     content: "";
     position: absolute;
     height: 2px;
-    bottom: -6px;
+    bottom: -4px;
     left: 0;
     background-color: var(--nav-hover-color);
     visibility: hidden;
-    width: 0px;
-    transition: all 0.3s ease-in-out 0s;
+    width: 0;
+    transition: width 0.2s ease;
   }
 
   .navmenu a:hover:before,
   .navmenu li:hover>a:before,
   .navmenu .active:before {
     visibility: visible;
-    width: 25px;
+    width: 100%; /* full-width underline instead of short bar */
   }
 
   .navmenu li:hover>a,
@@ -313,13 +317,13 @@ p {
     display: block;
     position: absolute;
     visibility: hidden;
-    left: 14px;
+    left: 18px;
     top: 130%;
     opacity: 0;
-    transition: 0.3s;
+    transition: 0.2s ease;
     border-radius: 4px;
     z-index: 99;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
   }
 
   .navmenu .dropdown ul li {
@@ -328,8 +332,9 @@ p {
 
   .navmenu .dropdown ul a {
     padding: 10px 20px;
-    font-size: 15px;
+    font-size: 0.95rem;
     text-transform: none;
+    letter-spacing: 0;
     color: var(--nav-dropdown-color);
   }
 
@@ -386,9 +391,9 @@ p {
     inset: 60px 20px 20px 20px;
     padding: 10px 0;
     margin: 0;
-    border-radius: 6px;
+    border-radius: 8px;
     background-color: var(--nav-mobile-background-color);
-    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+    border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
     box-shadow: none;
     overflow-y: auto;
     transition: 0.3s;
@@ -400,8 +405,10 @@ p {
     color: var(--nav-dropdown-color);
     padding: 10px 20px;
     font-family: var(--nav-font);
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -488,6 +495,7 @@ p {
     display: block;
   }
 }
+
 
 /*--------------------------------------------------------------
 # Global Footer
