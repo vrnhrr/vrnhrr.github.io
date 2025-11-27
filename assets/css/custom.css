@@ -234,7 +234,7 @@ p {
 /* Desktop Navigation */
 @media (min-width: 1200px) {
   .navmenu {
-    padding: 0;
+    padding: 0 24px;
     background-color: color-mix(in srgb, var(--background-color), var(--surface-color) 60%);
     border-bottom: 1px solid color-mix(in srgb, var(--nav-color), transparent 70%);
   }
@@ -253,11 +253,7 @@ p {
 
   .navmenu>ul>li {
     white-space: nowrap;
-    padding: 18px 18px; /* slightly more spacious */
-  }
-
-  .navmenu>ul>li:last-child {
-    padding-right: 0;
+    padding: 18px 18px;
   }
 
   .navmenu a,
