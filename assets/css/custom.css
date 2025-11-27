@@ -808,6 +808,14 @@ section,
 /*--------------------------------------------------------------
 # About Section
 --------------------------------------------------------------*/
+.about .content {
+  padding: 24px;
+  margin-bottom: 30px;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  border-radius: 8px;
+}
+
 .about .content h2 {
   font-weight: 700;
   font-size: 24px;
@@ -835,14 +843,17 @@ section,
   line-height: 0;
 }
 
+
 /*--------------------------------------------------------------
 # Skills Section
 --------------------------------------------------------------*/
 .skills .progress {
-  height: 60px;
-  display: block;
-  background: none;
-  border-radius: 0;
+  padding: 24px;
+  margin-bottom: 20px;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  border-radius: 8px;
+  background: var(--surface-color);
 }
 
 .skills .progress .skill {
@@ -863,6 +874,7 @@ section,
 .skills .progress-bar-wrap {
   background: color-mix(in srgb, var(--default-color), transparent 90%);
   height: 10px;
+  border-radius: 4px;
 }
 
 .skills .progress-bar {
@@ -870,14 +882,21 @@ section,
   height: 10px;
   transition: 0.9s;
   background-color: var(--accent-color);
+  border-radius: 4px;
 }
+
 
 /*--------------------------------------------------------------
 # Stats Section
 --------------------------------------------------------------*/
 .stats .stats-item {
-  padding: 30px;
+  padding: 24px;
+  margin-bottom: 30px;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  border-radius: 8px;
   width: 100%;
+  background: var(--surface-color);
 }
 
 .stats .stats-item span {
@@ -911,19 +930,17 @@ section,
   font-weight: 500;
 }
 
+
 /*--------------------------------------------------------------
 # Testimonials Section
 --------------------------------------------------------------*/
-.testimonials .section-header {
-  margin-bottom: 40px;
-}
-
-.testimonials .testimonials-carousel,
-.testimonials .testimonials-slider {
-  overflow: hidden;
-}
-
 .testimonials .testimonial-item {
+  padding: 24px;
+  margin-bottom: 30px;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  border-radius: 8px;
+  background: var(--surface-color);
   text-align: center;
 }
 
@@ -981,6 +998,15 @@ section,
   margin: 0 auto 15px auto;
 }
 
+.testimonials .section-header {
+  margin-bottom: 40px;
+}
+
+.testimonials .testimonials-carousel,
+.testimonials .testimonials-slider {
+  overflow: hidden;
+}
+
 .testimonials .swiper-wrapper {
   height: auto;
 }
@@ -1001,11 +1027,12 @@ section,
   background-color: var(--accent-color);
 }
 
-@media (min-width: 992px) {
+@testmedia (min-width: 992px) {
   .testimonials .testimonial-item p {
     width: 80%;
   }
 }
+
 
 /*--------------------------------------------------------------
 # Resume Section
