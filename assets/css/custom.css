@@ -72,9 +72,11 @@ a {
 }
 
 a:hover {
-  color: color-mix(in srgb, var(--accent-color), transparent 25%);
-  text-decoration: none;
+  color: var(--accent-color);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
+
 /* TYPOGRAPHY SYSTEM — REDEFINED*/
 
 /* Headings */
