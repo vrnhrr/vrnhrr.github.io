@@ -866,25 +866,20 @@ section,
   font-family: var(--heading-font);
 }
 
-.skills .progress .skill .val {
-  float: right;
-  font-style: normal;
 }
-
-.skills .progress-bar-wrap {
-  background: color-mix(in srgb, var(--default-color), transparent 90%);
-  height: 10px;
-  border-radius: 4px;
-}
-
-.skills .progress-bar {
-  width: 1px;
-  height: 10px;
-  transition: 0.9s;
-  background-color: var(--accent-color);
-  border-radius: 4px;
-}
-
+.skills .progress .skill .val { 
+  float: right; 
+  font-style: normal; 
+} 
+.skills .progress-bar-wrap { 
+  background: color-mix(in srgb, var(--default-color), transparent 90%); 
+  height: 10px; 
+} 
+.skills .progress-bar { 
+  width: 1px; 
+  height: 10px; 
+  transition: 0.9s; 
+  background-color: var(--accent-color); }
 
 /*--------------------------------------------------------------
 # Stats Section
