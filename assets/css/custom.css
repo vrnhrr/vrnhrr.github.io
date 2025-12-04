@@ -76,6 +76,9 @@
 }
 
 .services,
+.hero,
+.portfolio,
+.resume,
 .about,
 .skills,
 .stats,
@@ -94,7 +97,25 @@
   animation: button-pulse 0.4s ease-in-out;
 }
 
+.floating-circle {
+  z-index: 999;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent-color) 60%, white 30%);
+  position: absolute;
+  top: 30%;
+  left: 10%;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
 .loader {
+  z-index: 999;
   width: 60px;
   aspect-ratio: 4;
   --c:#000 90%,#0000;
@@ -116,7 +137,7 @@
 }
 
 .portfolio {
-  background: linear-gradient(90deg, #3a7bd5, #659ff0, #3a7bd5);
+  background: linear-gradient(90deg, #BE93C5, #7BC6CC, #3a7bd5);
   background-size: 300% 300%;
   animation: bg-shift 6s linear infinite;
 }
