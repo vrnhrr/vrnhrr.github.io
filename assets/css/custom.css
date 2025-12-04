@@ -109,6 +109,18 @@
 @keyframes l4 {
     to{width:25px;aspect-ratio: 1}
 }
+
+@keyframes bg-shift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.portfolio {
+  background: linear-gradient(90deg, #3a7bd5, #659ff0, #3a7bd5);
+  background-size: 300% 300%;
+  animation: bg-shift 6s linear infinite;
+}
+
 /*--------------------------------------------------------------
 # General Styling & Shared Classes
 --------------------------------------------------------------*/
