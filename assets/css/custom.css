@@ -116,25 +116,31 @@
 
 .loader {
   position: absolute;
-  top: 20%;
-  left: 15%;
+  top: 30%;
+  left: 10%;
   z-index: 9999;
+
   width: 60px;
   aspect-ratio: 4;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--accent-color) 60%, white 30%);
+  --c: var(--accent-color) 90%, #0000;
 
   background-image:
     radial-gradient(circle closest-side at left  6px top 50%, var(--c)),
-    radial-gradient(circle closest-side,               var(--c)),
+    radial-gradient(circle closest-side,                 var(--c)),
     radial-gradient(circle closest-side at right 6px top 50%, var(--c));
 
   background-size: 100% 100%;
   background-repeat: no-repeat;
-
-  overflow: hidden;
   animation: l4 1s infinite alternate;
 }
+
+@keyframes l4 {
+  to {
+    width: 25px;
+    aspect-ratio: 1;
+  }
+}
+
 
 @keyframes l4 {
   to {
