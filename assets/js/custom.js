@@ -109,3 +109,218 @@ function showSuccessPopup(message) {
     setTimeout(() => popup.remove(), 300);
   }, 2500);
 }
+
+// ======================================================
+// OPTIONAL TASKS
+// ======================================================
+
+// Track validation for disabling submit button
+const formValidity = {
+  name: false,
+  surname: false,
+  email: false,
+  phone: false,
+  address: false,
+  rating1: false,
+  rating2: false,
+  rating3: false
+};
+
+// -----------------------------------------------
+// Helper: Show field error
+// -----------------------------------------------
+function showError(field, message) {
+  field.classList.add("is-invalid");
+
+  let errorElem = field.nextElementSibling;
+  if (!errorElem || !errorElem.classList.contains("error-text")) {
+    errorElem = document.createElement("div");
+    errorElem.classList.add("error-text");
+    errorElem.style.color = "red";
+    errorElem.style.fontSize = "13px";
+    errorElem.style.marginTop = "4px";
+    field.insertAdjacentElement("afterend", errorElem);
+  }
+  errorElem.textContent = message;
+}
+
+// -----------------------------------------------
+// Helper: Clear error
+// -----------------------------------------------
+function clearError(field) {
+  field.classList.remove("is-invalid");
+  const errorElem = field.nextElementSibling;
+  if (errorElem && errorElem.classList.contains("error-text")) {
+    errorElem.remove();
+  }
+}
+
+// -----------------------------------------------
+// NAME & SURNAME VALIDATION
+// Letters only + required
+// -----------------------------------------------
+function validateName(fieldId, key) {
+  const field = document.getElementById(fieldId);
+  const value = field.value.trim();
+
+  if (value === "") {
+    showError(field, "This field is required.");
+    formValidity[key] = false;
+  } else if (!/^[A-Za-zÀ-ž\s-]+$/.test(value)) {
+    showError(field, "Only letters allowed.");
+    formValidity[key] = false;
+  } else {
+    clearError(field);
+    formValidity[key] = true;
+  }
+  updateSubmitButton();
+}
+
+// -----------------------------------------------
+// EMAIL VALIDATION
+// -----------------------------------------------
+function validateEmail() {
+  const field = document.getElementById("email-field");
+  const value = field.value.trim();
+
+  if (value === "") {
+    showError(field, "Email is required.");
+    formValidity.email = false;
+  } else if (!/^\S+@\S+\.\S+$/.test(value)) {
+    showError(field, "Invalid email format.");
+    formValidity.email = false;
+  } else {
+    clearError(field);
+    formValidity.email = true;
+  }
+  updateSubmitButton();
+}
+
+// -----------------------------------------------
+// ADDRESS VALIDATION
+// Basic check for: not empty + at least 5 chars
+// -----------------------------------------------
+function validateAddress() {
+  const field = document.getElementById("address-field");
+  const value = field.value.trim();
+
+  if (value.length < 5) {
+    showError(field, "Address must be meaningful.");
+    formValidity.address = false;
+  } else {
+    clearError(field);
+    formValidity.address = true;
+  }
+  updateSubmitButton();
+}
+
+// -----------------------------------------------
+// RATING VALIDATION (1–10)
+// -----------------------------------------------
+function validateRating(fieldId, key) {
+  const field = document.getElementById(fieldId);
+  const value = Number(field.value);
+
+  if (!value || value < 1 || value > 10) {
+    showError(field, "Enter a number 1–10.");
+    formValidity[key] = false;
+  } else {
+    clearError(field);
+    formValidity[key] = true;
+  }
+  updateSubmitButton();
+}
+
+// -----------------------------------------------
+// PHONE NUMBER MASKING
+// Lithuania: +370 6xx xxxxx
+// -----------------------------------------------
+function maskPhone() {
+  const field = document.getElementById("phone-field");
+  let digits = field.value.replace(/\D/g, ""); // keep digits only
+
+  // Enforce Lithuanian numbers: always start with +370
+  if (digits.startsWith("370")) digits = digits;
+  else if (digits.startsWith("0")) digits = "370" + digits.slice(1);
+  else if (!digits.startsWith("370")) digits = "370" + digits;
+
+  // Limit total digits to +370 6XX XXXXX
+  digits = digits.slice(0, 11);
+
+  // Insert spaces: 370 6xx xxxxx
+  let formatted = "+";
+  if (digits.length > 0) formatted += digits.slice(0, 3);
+  if (digits.length > 3) formatted += " " + digits.slice(3, 4);
+  if (digits.length > 4) formatted += digits.slice(4, 6);
+  if (digits.length > 6) formatted += " " + digits.slice(6);
+
+  field.value = formatted;
+
+  // Validate length
+  if (digits.length === 11 && digits[3] === "6") {
+    clearError(field);
+    formValidity.phone = true;
+  } else {
+    showError(field, "Enter a valid Lithuanian mobile number.");
+    formValidity.phone = false;
+  }
+  updateSubmitButton();
+}
+
+// -----------------------------------------------
+// DISABLE SUBMIT UNTIL FORM IS VALID
+// -----------------------------------------------
+function updateSubmitButton() {
+  const button = document.querySelector("#contactForm button");
+
+  const allValid = Object.values(formValidity).every(v => v === true);
+
+  button.disabled = !allValid;
+
+  if (button.disabled) {
+    button.style.opacity = "0.5";
+    button.style.cursor = "not-allowed";
+  } else {
+    button.style.opacity = "1";
+    button.style.cursor = "pointer";
+  }
+}
+
+// -----------------------------------------------
+// ADD REAL-TIME VALIDATION LISTENERS
+// Call this when the page loads
+// -----------------------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+  // Name + surname
+  document.getElementById("name-field").addEventListener("input", () =>
+    validateName("name-field", "name")
+  );
+
+  document.getElementById("surname-field").addEventListener("input", () =>
+    validateName("surname-field", "surname")
+  );
+
+  // Email
+  document.getElementById("email-field").addEventListener("input", validateEmail);
+
+  // Address
+  document.getElementById("address-field").addEventListener("input", validateAddress);
+
+  // Ratings
+  document.getElementById("rating1-field").addEventListener("input", () =>
+    validateRating("rating1-field", "rating1")
+  );
+  document.getElementById("rating2-field").addEventListener("input", () =>
+    validateRating("rating2-field", "rating2")
+  );
+  document.getElementById("rating3-field").addEventListener("input", () =>
+    validateRating("rating3-field", "rating3")
+  );
+
+  // Phone masking
+  document.getElementById("phone-field").addEventListener("input", maskPhone);
+
+  // Initialize disabled
+  updateSubmitButton();
+});
+
