@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Team Calendar</title>
+
+  <!-- Vendor CSS -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link href="assets/css/custom.css" rel="stylesheet">
+</head>
+
+<body class="calendar-page">
+
+  <!-- Header -->
+  <header id="header" class="header d-flex align-items-center light-background sticky-top">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <h1 class="sitename">DARIVREN</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="memory.html">Memory Game</a></li>
+          <li><a href="team-calendar.html" class="active">Team Calendar</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <section class="section calendar-section">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Team Work Calendar</h2>
+          <p>Manage team events, deadlines, and meetings.</p>
+        </div>
+
+        <div class="calendar-controls d-flex justify-content-between align-items-center mb-3">
+          <button id="prevMonth" class="btn btn-outline-primary">&lt; Prev</button>
+          <h3 id="monthYear" class="m-0"></h3>
+          <button id="nextMonth" class="btn btn-outline-primary">Next &gt;</button>
+        </div>
+
+        <div class="calendar-user mb-3">
+          <button id="userButton" class="btn btn-secondary">Add User</button>
+          <span id="currentUser" class="ms-2"></span>
+        </div>
+
+        <table class="table table-bordered text-center calendar-table">
+          <thead>
+            <tr>
+              <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+            </tr>
+          </thead>
+          <tbody id="calendarBody"></tbody>
+        </table>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer" class="footer light-background">
+    <div class="container text-center">
+      <p>© DARIVREN — All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/calendar.js"></script> <!-- YOUR CALENDAR FILE -->
+</body>
+
+</html>
