@@ -237,33 +237,33 @@ function validateRating(fieldId, key) {
 // -----------------------------------------------
 function maskPhone() {
   const field = document.getElementById("phone-field");
-  let digits = field.value.replace(/\D/g, ""); // keep digits only
 
-  // Enforce Lithuanian numbers: always start with +370
-  if (digits.startsWith("370")) digits = digits;
-  else if (digits.startsWith("0")) digits = "370" + digits.slice(1);
-  else if (!digits.startsWith("370")) digits = "370" + digits;
+  // Extract digits from user input
+  let digits = field.value.replace(/\D/g, "");
 
-  // Limit total digits to +370 6XX XXXXX
-  digits = digits.slice(0, 11);
+  // Limit to 7 digits (xx xxxxx)
+  digits = digits.slice(0, 7);
 
-  // Insert spaces: 370 6xx xxxxx
-  let formatted = "+";
-  if (digits.length > 0) formatted += digits.slice(0, 3);
-  if (digits.length > 3) formatted += " " + digits.slice(3, 4);
-  if (digits.length > 4) formatted += digits.slice(4, 6);
-  if (digits.length > 6) formatted += " " + digits.slice(6);
+  // Build the masked number
+  let mask = "+370 ";
 
-  field.value = formatted;
+  // Fill the first block (xxx)
+  let firstBlock = digits.slice(0, 3).padEnd(3, "x");
 
-  // Validate length
-  if (digits.length === 11 && digits[3] === "6") {
+  // Fill the second block (xxxxx)
+  let secondBlock = digits.slice(3).padEnd(5, "x");
+
+  field.value = `${mask}${firstBlock} ${secondBlock}`;
+
+  // Validation: valid if exactly 7 digits entered
+  if (digits.length === 7) {
     clearError(field);
     formValidity.phone = true;
   } else {
-    showError(field, "Enter a valid Lithuanian mobile number.");
+    showError(field, "Enter a valid phone: +370 xxx xxxxx");
     formValidity.phone = false;
   }
+
   updateSubmitButton();
 }
 
