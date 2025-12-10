@@ -842,6 +842,106 @@ section,
 .section-title p {
   margin-bottom: 0;
 }
+/*--------------------------------------------------------------
+# Memory Game
+--------------------------------------------------------------*/
+.memory-game-section {
+  padding-top: 40px;
+}
+
+.memory-game-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.memory-game-settings label {
+  margin-right: 8px;
+  font-weight: 600;
+}
+
+.memory-game-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .memory-game-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.memory-game-board {
+  display: grid;
+  gap: 10px;
+  justify-content: center;
+}
+
+.memory-card {
+  width: 70px;
+  height: 90px;
+  perspective: 800px;
+  cursor: pointer;
+}
+
+.memory-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease;
+}
+
+.memory-card.flipped .memory-card-inner {
+  transform: rotateY(180deg);
+}
+
+.memory-card-front,
+.memory-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-family: var(--heading-font);
+}
+
+.memory-card-front {
+  background: color-mix(in srgb, var(--accent-color), white 85%);
+  color: var(--heading-color);
+}
+
+.memory-card-back {
+  background: var(--surface-color);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 80%);
+  transform: rotateY(180deg);
+}
+
+.memory-game-stats {
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
+  background: var(--surface-color);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  font-size: 0.95rem;
+}
+
+.memory-game-stats h3 {
+  margin-bottom: 10px;
+}
+
+.memory-game-win {
+  margin-top: 12px;
+  font-weight: 700;
+  color: var(--accent-color);
+}
 
 /*--------------------------------------------------------------
 # Hero Section
