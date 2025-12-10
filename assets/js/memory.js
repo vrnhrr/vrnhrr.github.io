@@ -223,6 +223,3 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize best scores display
   loadBestScores();
 });
-
-});
-
