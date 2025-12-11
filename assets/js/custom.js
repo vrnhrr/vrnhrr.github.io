@@ -148,7 +148,7 @@ function maskPhone() {
     clearError(field);
     formValidity.phone = true;
   } else {
-    showError(field, "Correct format: +370 000 00000");
+    showError(field, "Correct format: +370 xxx xxxxx");
     formValidity.phone = false;
   }
 
