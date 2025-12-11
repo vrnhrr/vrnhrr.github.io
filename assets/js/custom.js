@@ -113,45 +113,38 @@ function validateRating(id, key) {
 }
 
 // ---------------- PHONE MASKING ----------------
-
 function maskPhone() {
   const field = document.getElementById("phone-field");
 
-  // Keep only digits — but preserve leading '+'
+  // keep '+' if present, and digits only
   let raw = field.value;
   let plus = raw.startsWith("+") ? "+" : "";
   let digits = raw.replace(/\D/g, "");
 
-  // Limit to maximum Lithuanian length (3 country + 2 + 5 = 10 digits)
-  digits = digits.slice(0, 10);
 
-  // If user hasn't typed enough digits yet → don't format
-  if (digits.length <= 3) {
-    field.value = plus + digits; 
-    formValidity.phone = false;
-    return;
+  // allow max of 12 digits (+370xxxxxxxx)
+  digits = digits.slice(0, 12);
+
+  // +370 000 00000 pattern, but user must type those digits themselves
+  let formatted = plus;
+
+  if (digits.length > 0) {
+    formatted += digits.slice(0, 3);
   }
-
-  // Formatting rules:
-  // +370 000 00000
-  let country = digits.slice(0, 3);      // 370
-  let block1 = digits.slice(3, 6);       // first 3 mobile digits
-  let block2 = digits.slice(6);          // last up to 5 digits
-
-  let formatted = plus + country;
-
-  if (block1.length > 0) {
-    formatted += " " + block1;
+  if (digits.length > 3) {
+    formatted += " " + digits.slice(3, 6);
   }
-
-  if (block2.length > 0) {
-    formatted += " " + block2;
+  if (digits.length > 6) {
+    formatted += " " + digits.slice(6);
   }
 
   field.value = formatted;
 
-  // VALIDATION: final Lithuanian format must be +370 xxx xxxxx
-  if (formatted.startsWith("+370") && block1.length === 3 && block2.length === 5) {
+  // VALIDATION: require EXACT pattern, but do not rewrite digits
+  // +370 000 00000 = +370 + space + 3 digits + space + 5 digits
+  const validPattern = /^\+370 \d{3} \d{5}$/;
+
+  if (validPattern.test(field.value)) {
     clearError(field);
     formValidity.phone = true;
   } else {
@@ -161,6 +154,7 @@ function maskPhone() {
 
   updateSubmitButton();
 }
+
 
 
 // ---------------- FORM SUBMISSION ----------------
