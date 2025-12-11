@@ -117,14 +117,25 @@ function validateRating(id, key) {
 function maskPhone() {
   const field = document.getElementById("phone-field");
 
-  let digits = field.value.replace(/\D/g, "").slice(0, 7);
+  // Remove everything except digits
+  let digits = field.value.replace(/\D/g, "");
 
+  // Remove country code duplicates (in case user types 370)
+  if (digits.startsWith("370")) {
+    digits = digits.slice(3);
+  }
+
+  // Limit to 7 digits (xxx xxxxx)
+  digits = digits.slice(0, 7);
+
+  // Build formatted number
   let mask = "+370 ";
-  let firstBlock = digits.slice(0, 3).padEnd(3, "x");
-  let secondBlock = digits.slice(3).padEnd(5, "x");
+  let part1 = digits.slice(0, 3).padEnd(3, "x");
+  let part2 = digits.slice(3).padEnd(5, "x");
 
-  field.value = `${mask}${firstBlock} ${secondBlock}`;
+  field.value = `${mask}${part1} ${part2}`;
 
+  // Validation logic
   if (digits.length === 7) {
     clearError(field);
     formValidity.phone = true;
