@@ -47,6 +47,9 @@ function renderCalendar() {
                 const eventDiv = document.createElement('span');
                 eventDiv.classList.add('event');
                 eventDiv.textContent = `${event.time} - ${event.name} (${event.user})`;
+
+                eventDiv.setAttribute("title", `${event.time} - ${event.name} (${event.user})`);
+
                 const deleteBtn = document.createElement('button');
                 deleteBtn.textContent = 'x';
                 deleteBtn.style.marginLeft = '5px';
