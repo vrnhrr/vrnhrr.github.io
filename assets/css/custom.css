@@ -852,13 +852,21 @@ section,
 }
 
 .event {
-  display: block;
   background: var(--accent-color);
   color: white;
   border-radius: 4px;
   padding: 2px 4px;
   margin-top: 4px;
   font-size: 12px;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: help;        /* indicates tooltip */
+}
+
+/* Tooltip using the title="" attribute */
+.event:hover {
+  opacity: 0.85;
 }
 
 .addEventButton {
