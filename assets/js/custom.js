@@ -1,5 +1,5 @@
 // ===================================================
-// CONTACT FORM SCRIPT (FINAL FIXED VERSION)
+// CONTACT FORM SCRIPT
 // ===================================================
 
 // Track validation state
