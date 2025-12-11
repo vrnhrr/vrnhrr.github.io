@@ -117,35 +117,36 @@ function validateRating(id, key) {
 function maskPhone() {
   const field = document.getElementById("phone-field");
 
-  // Remove everything except digits
+  // Get all digits
   let digits = field.value.replace(/\D/g, "");
 
-  // Remove country code duplicates (in case user types 370)
-  if (digits.startsWith("370")) {
-    digits = digits.slice(3);
-  }
-
-  // Limit to 7 digits (xxx xxxxx)
+  // Limit to 7 digits (2 + 5 structure)
   digits = digits.slice(0, 7);
 
-  // Build formatted number
-  let mask = "+370 ";
-  let part1 = digits.slice(0, 3).padEnd(3, "x");
-  let part2 = digits.slice(3).padEnd(5, "x");
+  // Build formatted result
+  let formatted = "+370";
 
-  field.value = `${mask}${part1} ${part2}`;
+  if (digits.length > 0) {
+    formatted += " " + digits.slice(0, 3);  // first block (3 digits)
+  }
+  if (digits.length > 3) {
+    formatted += " " + digits.slice(3);     // second block (up to 5 digits)
+  }
 
-  // Validation logic
+  field.value = formatted;
+
+  // VALIDATION: must be exactly 7 digits typed
   if (digits.length === 7) {
     clearError(field);
     formValidity.phone = true;
   } else {
-    showError(field, "Format: +370 xxx xxxxx");
+    showError(field, "Format: +370 000 00000");
     formValidity.phone = false;
   }
 
   updateSubmitButton();
 }
+
 
 // ---------------- FORM SUBMISSION ----------------
 
