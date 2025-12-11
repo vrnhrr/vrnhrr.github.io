@@ -117,30 +117,45 @@ function validateRating(id, key) {
 function maskPhone() {
   const field = document.getElementById("phone-field");
 
-  // Get all digits
-  let digits = field.value.replace(/\D/g, "");
+  // Keep only digits — but preserve leading '+'
+  let raw = field.value;
+  let plus = raw.startsWith("+") ? "+" : "";
+  let digits = raw.replace(/\D/g, "");
 
-  // Limit to 7 digits (2 + 5 structure)
-  digits = digits.slice(0, 7);
+  // Limit to maximum Lithuanian length (3 country + 2 + 5 = 10 digits)
+  digits = digits.slice(0, 10);
 
-  // Build formatted result
-  let formatted = "+370";
-
-  if (digits.length > 0) {
-    formatted += " " + digits.slice(0, 3);  // first block (3 digits)
+  // If user hasn't typed enough digits yet → don't format
+  if (digits.length <= 3) {
+    field.value = plus + digits; 
+    formValidity.phone = false;
+    return;
   }
-  if (digits.length > 3) {
-    formatted += " " + digits.slice(3);     // second block (up to 5 digits)
+
+  // Formatting rules:
+  // +370 000 00000
+  let country = digits.slice(0, 3);      // 370
+  let block1 = digits.slice(3, 6);       // first 3 mobile digits
+  let block2 = digits.slice(6);          // last up to 5 digits
+
+  let formatted = plus + country;
+
+  if (block1.length > 0) {
+    formatted += " " + block1;
+  }
+
+  if (block2.length > 0) {
+    formatted += " " + block2;
   }
 
   field.value = formatted;
 
-  // VALIDATION: must be exactly 7 digits typed
-  if (digits.length === 7) {
+  // VALIDATION: final Lithuanian format must be +370 xxx xxxxx
+  if (formatted.startsWith("+370") && block1.length === 3 && block2.length === 5) {
     clearError(field);
     formValidity.phone = true;
   } else {
-    showError(field, "Format: +370 000 00000");
+    showError(field, "Correct format: +370 000 00000");
     formValidity.phone = false;
   }
 
