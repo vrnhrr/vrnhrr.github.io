@@ -845,24 +845,40 @@ section,
 /*--------------------------------------------------------------
 # Team Calendar
 --------------------------------------------------------------*/
+
+.calendar-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
 .calendar-table td {
   height: 90px;
+  width: 14.28%;
   vertical-align: top;
   position: relative;
+
+  overflow: hidden;
 }
 
 .event {
+  display: block;
+  max-width: 100%;
+
   background: var(--accent-color);
   color: white;
   border-radius: 4px;
   padding: 2px 4px;
   margin-top: 4px;
   font-size: 12px;
-  white-space: nowrap; 
+
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  cursor: help;        /* indicates tooltip */
+
+  cursor: help;
 }
+
 
 /* Tooltip using the title="" attribute */
 .event:hover {
