@@ -181,7 +181,7 @@ function handleContactForm(event) {
     name, surname, email, phone, address, avg
   });
 
-  const output = document.getElementById("form-output");
+  const output = document.getElementById("form-results");
   output.innerHTML = `
     <p><strong>Name:</strong> ${name}</p>
     <p><strong>Surname:</strong> ${surname}</p>
